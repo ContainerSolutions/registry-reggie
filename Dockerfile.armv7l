@@ -1,0 +1,15 @@
+FROM hypriot/rpi-alpine
+
+RUN set -ex \
+    && apk add --no-cache ca-certificates apache2-utils
+
+RUN mkdir /var/lib/registry
+COPY registry-armv7l-master /bin/registry
+COPY config.yml ./
+
+COPY entrypoint.sh ./
+
+ENTRYPOINT ["/entrypoint.sh"]
+EXPOSE 5000
+
+CMD ["/config.yml"]
