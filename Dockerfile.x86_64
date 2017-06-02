@@ -3,7 +3,10 @@ FROM alpine:3.5
 RUN set -ex \
     && apk add --no-cache ca-certificates apache2-utils
 
+RUN adduser -D registry  
+
 RUN mkdir /var/lib/registry
+RUN chown registry /var/lib/registry
 COPY registry-x86_64 /bin/registry
 COPY config.yml ./
 
@@ -11,5 +14,7 @@ COPY entrypoint.sh ./
 
 ENTRYPOINT ["/entrypoint.sh"]
 EXPOSE 5000
+
+USER registry
 
 CMD ["/config.yml"]
