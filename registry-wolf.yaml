@@ -1,0 +1,10 @@
+image: containersol/registry-wolf:latest
+manifests:
+  - image: containersol/registry-wolf-x86_64:latest
+    platform:
+      architecture: amd64
+      os: linux
+  - image: containersol/registry-wolf-armv7l:latest
+    platform:
+      architecture: arm
+      os: linux
